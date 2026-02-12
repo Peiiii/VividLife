@@ -1,0 +1,7 @@
+{
+  "name": "VividLife 悦活长寿系统",
+  "description": "由人工智能驱动的健康平台，专注于通过个性化数据分析、习惯追踪和专家级的长寿咨询来延长健康寿命和生命周期。",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
