@@ -12,17 +12,23 @@ export interface Message {
   text: string;
 }
 
-export interface HealthMetric {
+export interface Article {
+  id: string;
+  title: string;
+  summary: string;
+  content: string;
+  author: string;
   date: string;
-  biologicalAge: number;
-  chronologicalAge: number;
-  sleepScore: number;
-  activityMinutes: number;
+  readTime: string;
+  category: string;
+  image: string;
+  tags: string[];
 }
 
 export enum NavigationTab {
   Overview = 'overview',
   AIAdvisor = 'advisor',
   Tracker = 'tracker',
+  Articles = 'articles',
   Insights = 'insights'
 }
