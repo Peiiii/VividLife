@@ -18,39 +18,39 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-20 md:w-64 bg-white/80 backdrop-blur-xl border-r border-stone-100 flex flex-col z-50 transition-all duration-300">
+    <aside className="fixed left-0 top-0 h-screen w-20 md:w-64 bg-white/90 backdrop-blur-2xl border-r border-stone-200 flex flex-col z-50 transition-all duration-300">
       <div className="p-8 flex items-center gap-3">
-        <div className="bg-[#5F7161] p-2 rounded-full shadow-inner">
+        <div className="bg-[#4A614D] p-2.5 rounded-2xl shadow-lg shadow-[#4A614D]/20">
           <Leaf className="text-white w-5 h-5" />
         </div>
-        <span className="serif font-bold text-xl text-[#3E3232] hidden md:block tracking-wider">VividLife</span>
+        <span className="serif font-bold text-2xl text-[#1A1616] hidden md:block tracking-tight">VividLife</span>
       </div>
 
-      <nav className="flex-1 mt-4 px-4 space-y-3">
+      <nav className="flex-1 mt-6 px-4 space-y-2">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
+            className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 group ${
               activeTab === item.id
-                ? 'bg-[#5F7161] text-white shadow-lg shadow-[#5F7161]/20'
-                : 'text-stone-400 hover:text-[#5F7161] hover:bg-stone-50'
+                ? 'bg-[#4A614D] text-white shadow-xl shadow-[#4A614D]/30'
+                : 'text-stone-500 hover:text-[#4A614D] hover:bg-stone-50'
             }`}
           >
-            <item.icon className={`w-5 h-5 shrink-0 ${activeTab === item.id ? 'stroke-[2.5px]' : 'stroke-[1.5px]'}`} />
-            <span className="hidden md:block text-sm font-medium tracking-wide">{item.label}</span>
+            <item.icon className={`w-5 h-5 shrink-0 transition-transform group-hover:scale-110 ${activeTab === item.id ? 'stroke-[2.5px]' : 'stroke-[2px]'}`} />
+            <span className={`hidden md:block text-sm font-semibold tracking-wide ${activeTab === item.id ? 'opacity-100' : 'opacity-80'}`}>{item.label}</span>
           </button>
         ))}
       </nav>
 
       <div className="p-6">
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-stone-50/50 border border-stone-100">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-stone-200">
-            <img src="https://picsum.photos/80/80?random=1" alt="Avatar" className="w-full h-full object-cover opacity-80" />
+        <div className="flex items-center gap-3 p-4 rounded-2xl bg-stone-50 border border-stone-200 shadow-sm">
+          <div className="w-10 h-10 rounded-xl overflow-hidden ring-2 ring-white shadow-sm">
+            <img src="https://picsum.photos/100/100?random=1" alt="Avatar" className="w-full h-full object-cover" />
           </div>
           <div className="hidden md:block overflow-hidden">
-            <p className="text-xs font-bold text-stone-700 truncate">林间漫步者</p>
-            <p className="text-[10px] text-stone-400 uppercase tracking-tighter">探索自然律动</p>
+            <p className="text-sm font-bold text-stone-900 truncate">林间漫步者</p>
+            <p className="text-[10px] text-[#4A614D] font-black uppercase tracking-widest mt-0.5">Level 12</p>
           </div>
         </div>
       </div>

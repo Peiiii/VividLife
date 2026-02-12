@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Clock, User, ChevronRight, ArrowLeft, Bookmark, Share2, Sparkles, Quote } from 'lucide-react';
+import { Clock, User, ChevronRight, ArrowLeft, Bookmark, Share2, Sparkles, Quote, ExternalLink } from 'lucide-react';
 import { Article } from '../types';
 import { marked } from 'marked';
 
@@ -100,77 +100,82 @@ const Articles: React.FC = () => {
 
   if (selectedArticle) {
     return (
-      <div className="bg-white min-h-screen rounded-[2.5rem] shadow-sm overflow-hidden animate-in fade-in duration-700">
-        <div className="sticky top-0 bg-white/60 backdrop-blur-xl border-b border-stone-50 p-6 flex items-center justify-between z-10">
+      <div className="bg-white min-h-screen rounded-[3rem] shadow-2xl shadow-stone-200/50 overflow-hidden animate-in fade-in duration-700">
+        <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-stone-100 p-6 flex items-center justify-between z-10">
           <button 
             onClick={() => setSelectedArticle(null)}
-            className="group flex items-center gap-2 text-stone-400 hover:text-[#5F7161] transition-all"
+            className="group flex items-center gap-3 text-stone-600 hover:text-[#4A614D] transition-all"
           >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> 
-            <span className="text-sm font-medium">返回探索</span>
+            <div className="bg-stone-50 p-2 rounded-xl group-hover:bg-[#4A614D]/10 transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+            </div>
+            <span className="text-sm font-bold tracking-wide">回到探索</span>
           </button>
           <div className="flex gap-4">
-            <button className="p-2.5 text-stone-300 hover:text-[#5F7161] hover:bg-stone-50 rounded-full transition-all"><Bookmark className="w-5 h-5" /></button>
-            <button className="p-2.5 text-stone-300 hover:text-[#5F7161] hover:bg-stone-50 rounded-full transition-all"><Share2 className="w-5 h-5" /></button>
+            <button className="p-3 text-stone-400 hover:text-[#4A614D] bg-stone-50 rounded-2xl transition-all"><Bookmark className="w-5 h-5" /></button>
+            <button className="p-3 text-stone-400 hover:text-[#4A614D] bg-stone-50 rounded-2xl transition-all"><Share2 className="w-5 h-5" /></button>
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto px-8 py-16">
-          <header className="mb-16">
-            <div className="flex justify-center mb-8">
-              <span className="px-4 py-1.5 bg-[#F4F1DE] text-[#5F7161] rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">
+        <div className="max-w-4xl mx-auto px-8 py-20">
+          <header className="mb-20">
+            <div className="flex justify-center mb-10">
+              <span className="px-5 py-2 bg-[#F4F1DE] text-[#4A614D] rounded-2xl text-[11px] font-black uppercase tracking-[0.25em] shadow-sm">
                 {selectedArticle.category}
               </span>
             </div>
-            <h1 className="serif text-5xl font-bold text-stone-900 text-center leading-[1.2] mb-10">
+            <h1 className="serif text-6xl font-bold text-stone-900 text-center leading-[1.15] mb-12 tracking-tight">
               {selectedArticle.title}
             </h1>
-            <div className="flex items-center justify-center gap-8 text-stone-400 text-xs font-medium tracking-wide">
-              <span className="flex items-center gap-2"><User className="w-3.5 h-3.5" /> {selectedArticle.author}</span>
-              <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> {selectedArticle.readTime}</span>
-              <span>{selectedArticle.date}</span>
+            <div className="flex items-center justify-center gap-10 text-stone-600 text-sm font-semibold">
+              <span className="flex items-center gap-2.5"><User className="w-4 h-4 text-[#4A614D]" /> {selectedArticle.author}</span>
+              <span className="flex items-center gap-2.5"><Clock className="w-4 h-4 text-[#4A614D]" /> {selectedArticle.readTime}</span>
+              <span className="opacity-60">{selectedArticle.date}</span>
             </div>
           </header>
 
-          <div className="relative group mb-20">
+          <div className="relative group mb-24 px-4 md:px-0">
+             <div className="absolute inset-0 bg-[#4A614D]/5 -rotate-1 rounded-[3rem] scale-105 blur-2xl"></div>
              <img 
                src={selectedArticle.image} 
                alt={selectedArticle.title} 
-               className="w-full h-[500px] object-cover rounded-[2rem] shadow-2xl shadow-stone-200 group-hover:scale-[1.01] transition-transform duration-700"
+               className="relative w-full h-[600px] object-cover rounded-[3rem] shadow-2xl transition-transform duration-1000 group-hover:scale-[1.01]"
              />
-             <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl hidden md:block max-w-xs">
-                <Quote className="text-stone-100 w-12 h-12 absolute -top-2 -left-2" />
-                <p className="text-stone-500 italic text-sm relative z-10 leading-relaxed">
+             <div className="absolute -bottom-10 -right-6 bg-white p-8 rounded-[2.5rem] shadow-2xl hidden lg:block max-w-sm border border-stone-50">
+                <Quote className="text-[#4A614D]/10 w-16 h-16 absolute -top-4 -left-4" />
+                <p className="text-stone-700 italic text-base relative z-10 leading-relaxed font-medium">
                    "{selectedArticle.summary}"
                 </p>
              </div>
           </div>
 
-          <div className="flex items-start gap-6 bg-[#FDFBF7] p-8 rounded-3xl border border-stone-100 mb-16">
-             <div className="bg-[#5F7161] p-3 rounded-2xl text-white shadow-lg">
-                <Sparkles className="w-5 h-5" />
+          <div className="flex items-start gap-8 bg-[#FDFBF7] p-10 rounded-[3rem] border border-stone-200/50 mb-20 shadow-inner">
+             <div className="bg-[#4A614D] p-4 rounded-2xl text-white shadow-xl shadow-[#4A614D]/30 shrink-0">
+                <Sparkles className="w-6 h-6" />
              </div>
              <div>
-                <h4 className="serif font-bold text-stone-800 text-lg mb-2">AI 导读：核心洞察</h4>
-                <p className="text-stone-500 text-sm leading-relaxed">{selectedArticle.summary}</p>
+                <h4 className="serif font-bold text-stone-900 text-xl mb-3 tracking-tight">AI 导读 · 核心洞察</h4>
+                <p className="text-stone-600 text-lg leading-relaxed font-medium">{selectedArticle.summary}</p>
              </div>
           </div>
 
           <article 
-            className="markdown-content prose prose-stone lg:prose-xl max-w-none text-stone-700"
+            className="markdown-content prose prose-stone lg:prose-xl max-w-none text-stone-800"
             dangerouslySetInnerHTML={{ __html: marked.parse(selectedArticle.content) }}
           />
 
-          <div className="mt-24 pt-10 border-t border-stone-100">
-             <div className="flex items-center justify-between">
-                <div className="flex gap-2">
+          <div className="mt-24 pt-12 border-t border-stone-100">
+             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="flex flex-wrap gap-3">
                   {selectedArticle.tags.map(tag => (
-                    <span key={tag} className="text-[10px] font-bold text-stone-400 uppercase tracking-widest px-3 py-1 bg-stone-50 rounded-full border border-stone-100">
+                    <span key={tag} className="text-[11px] font-black text-stone-500 uppercase tracking-widest px-5 py-2 bg-stone-50 rounded-xl border border-stone-100 hover:border-[#4A614D] transition-colors cursor-default">
                       #{tag}
                     </span>
                   ))}
                 </div>
-                <button className="serif text-stone-900 font-bold hover:text-[#5F7161] transition-colors">分享此份宁静 →</button>
+                <button className="serif text-stone-900 font-black text-lg hover:text-[#4A614D] transition-all flex items-center gap-3 group">
+                  分享此份宁静 <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                </button>
              </div>
           </div>
         </div>
@@ -179,22 +184,24 @@ const Articles: React.FC = () => {
   }
 
   return (
-    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-1000">
-      <div className="text-center max-w-2xl mx-auto space-y-4">
-        <h1 className="serif text-5xl font-bold text-stone-900 tracking-tight">探索身心的平衡</h1>
-        <p className="text-stone-500 text-lg font-light leading-relaxed">在自然的律动中寻回生活的本真，通过科学的视角重新认识你的身体。</p>
+    <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="text-center max-w-3xl mx-auto space-y-6">
+        <h1 className="serif text-6xl font-bold text-stone-900 tracking-tight leading-tight">探索身心的平衡</h1>
+        <p className="text-stone-600 text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+          在自然的律动中寻回生活的本真，<br/>让科学引领你走向更深邃的健康。
+        </p>
       </div>
 
       <div className="flex justify-center">
-        <div className="flex gap-2 p-1.5 bg-white/50 backdrop-blur-md rounded-[2rem] border border-stone-100 shadow-sm overflow-x-auto">
+        <div className="flex gap-2 p-2 bg-white/70 backdrop-blur-xl rounded-[2.5rem] border border-stone-200 shadow-xl overflow-x-auto">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-8 py-2.5 rounded-full text-xs font-bold transition-all duration-500 whitespace-nowrap tracking-widest uppercase ${
+              className={`px-10 py-3.5 rounded-full text-[11px] font-black transition-all duration-500 whitespace-nowrap tracking-widest uppercase ${
                 activeCategory === cat 
-                ? 'bg-[#5F7161] text-white shadow-xl shadow-[#5F7161]/30' 
-                : 'text-stone-400 hover:text-stone-600'
+                ? 'bg-[#4A614D] text-white shadow-2xl shadow-[#4A614D]/40' 
+                : 'text-stone-500 hover:text-stone-800 hover:bg-stone-50'
               }`}
             >
               {cat}
@@ -203,44 +210,44 @@ const Articles: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 px-4">
         {filteredArticles.map((article, index) => (
           <div 
             key={article.id}
             onClick={() => setSelectedArticle(article)}
-            className={`group cursor-pointer ${index % 2 !== 0 ? 'md:mt-12' : ''}`}
+            className={`group cursor-pointer flex flex-col ${index % 2 !== 0 ? 'md:mt-16' : ''}`}
           >
-            <div className="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] mb-8 shadow-2xl shadow-stone-200/50">
+            <div className="relative overflow-hidden rounded-[3rem] aspect-[4/5] mb-10 shadow-2xl shadow-stone-300/40">
               <img 
                 src={article.image} 
                 alt={article.title} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] cubic-bezier(0.2, 0, 0.2, 1)"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s] ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute top-8 left-8">
-                <span className="bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black text-stone-800 uppercase tracking-[0.2em] shadow-lg">
+              <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/0 transition-colors" />
+              <div className="absolute top-10 left-10">
+                <span className="bg-white/95 backdrop-blur-md px-5 py-2 rounded-2xl text-[11px] font-black text-stone-900 uppercase tracking-[0.2em] shadow-2xl border border-white/20">
                   {article.category}
                 </span>
               </div>
             </div>
             
-            <div className="px-4 space-y-4">
-              <div className="flex items-center gap-4 text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                <span>{article.readTime}</span>
-                <span className="w-1 h-1 bg-stone-300 rounded-full" />
+            <div className="px-6 space-y-5">
+              <div className="flex items-center gap-5 text-stone-500 text-[11px] font-black uppercase tracking-widest">
+                <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {article.readTime}</span>
+                <span className="w-1.5 h-1.5 bg-[#4A614D] rounded-full" />
                 <span>{article.date}</span>
               </div>
               
-              <h3 className="serif text-3xl font-bold text-stone-800 leading-tight group-hover:text-[#5F7161] transition-colors duration-500">
+              <h3 className="serif text-4xl font-bold text-stone-900 leading-[1.15] group-hover:text-[#4A614D] transition-colors duration-500 tracking-tight">
                 {article.title}
               </h3>
               
-              <p className="text-stone-500 text-sm leading-loose line-clamp-2 font-light">
+              <p className="text-stone-600 text-lg leading-relaxed line-clamp-2 font-medium">
                 {article.summary}
               </p>
               
-              <div className="pt-4 flex items-center gap-2 text-stone-900 font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
-                阅读全文 <ChevronRight className="w-4 h-4" />
+              <div className="pt-4 flex items-center gap-3 text-stone-900 font-black text-sm uppercase tracking-widest group-hover:gap-6 transition-all group-hover:text-[#4A614D]">
+                阅读全文 <ChevronRight className="w-5 h-5" />
               </div>
             </div>
           </div>
